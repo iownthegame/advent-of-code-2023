@@ -28,17 +28,13 @@ fun main() {
 
     fun part2(input: List<String>): Int {
         return input.sumOf { line ->
-            val (gameString, bagsString) = line.split(": ").map { it.trim() }
-            val gameIndex = gameString.split(" ").last().toInt()
+            val (_, bagsString) = line.split(": ").map { it.trim() }
             val fewestCubeInBag = mutableMapOf("red" to 0, "green" to 0, "blue" to 0)
             bagsString.split("; ").map { // bagString
-//                val bag = mutableMapOf<String, Int>()
                 it.split(", ").forEach { colorString ->
                     val (amount, color) = colorString.split(" ").map { it.trim() }
-//                    bag[color] = amount.toInt()
                     fewestCubeInBag[color] = maxOf(fewestCubeInBag[color]!!, amount.toInt())
                 }
-//                bag
             }
 
             fewestCubeInBag["red"]!! * fewestCubeInBag["green"]!! * fewestCubeInBag["blue"]!!
